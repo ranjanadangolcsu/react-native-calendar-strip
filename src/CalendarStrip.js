@@ -385,7 +385,7 @@ class CalendarStrip extends Component {
 
   // Check whether date is allowed
   isDateAllowed(date, props = this.props) {
-    if (this.onDisableWeekends(date) && this.onDisableHolidays(date)) {
+    if (!this.onDisableWeekends(date) && !this.onDisableHolidays(date)) {
       // datesBlacklist entries override datesWhitelist
       if (props.datesBlacklist !== undefined) {
         for (let disallowed of props.datesBlacklist) {
