@@ -15,6 +15,7 @@ class CalendarDay extends Component {
     onDateSelected: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
     enabled: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool.isRequired,
 
     marking: PropTypes.any,
     markedDates: PropTypes.array,
@@ -230,6 +231,7 @@ class CalendarDay extends Component {
     return (
       <TouchableOpacity
         onPress={this.props.onDateSelected.bind(this, this.props.date)}
+        disabled={this.props.disabled}
       >
         <View
           key={this.props.date}
