@@ -34,6 +34,7 @@ declare module "react-native-calendar-strip" {
     marking: any;
     selected: boolean;
     enabled: boolean;
+    disabled: boolean;
     showDayName: boolean;
     showDayNumber: boolean;
     onDateSelected: (event: GestureResponderEvent) => void;
