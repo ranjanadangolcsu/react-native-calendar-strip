@@ -82,6 +82,10 @@ declare module "react-native-calendar-strip" {
       datesWhitelist?: TDateRange[];
       datesBlacklist?: TDateRange[];
 
+      disableHolidays?: boolean;
+      disableWeekends?: boolean;
+      disabled?: boolean;
+
       showMonth?: boolean;
       showDayName?: boolean;
       showDayNumber?: boolean;
