@@ -371,12 +371,10 @@ class CalendarStrip extends Component {
   }
 
   onDisableWeekends(selectedDate) {
-    if (this.props.disableWeekends) {
-      return (
-        moment(selectedDate).weekday !== 6 && moment(selectedDate).weekday !== 0
-      );
-    }
-    return false;
+    return this.props.disableWeekends ? (
+      moment(selectedDate).isoWeekday() !== 6 &&
+      moment(selectedDate).isoWeekday() !== 7
+    ) : false;
   }
 
   onDisableHolidays(selectedDate) {
