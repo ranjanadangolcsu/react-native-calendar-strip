@@ -385,42 +385,47 @@ class CalendarStrip extends Component {
 
   // Check whether date is allowed
   isDateAllowed(date, props = this.props) {
-    if (!this.onDisableWeekends(date) && !this.onDisableHolidays(date)) {
-      // datesBlacklist entries override datesWhitelist
-      if (props.datesBlacklist !== undefined) {
-        for (let disallowed of props.datesBlacklist) {
-          // Blacklist start/end object
-          if (disallowed.start && disallowed.end) {
-            if (date.isBetween(disallowed.start, disallowed.end, "day", "[]")) {
-              return false;
-            }
-          } else {
-            if (date.isSame(disallowed, "day")) {
-              return false;
-            }
-          }
-        }
-      }
+    if (this.onDisableWeekends(date)) {
+      return false;
+    }
 
-      if (props.datesWhitelist === undefined) {
-        return true;
-      }
+    if (this.onDisableHolidays(date)) {
+      return false;
+    }
 
-      // Whitelist
-      for (let allowed of props.datesWhitelist) {
-        // start/end object
-        if (allowed.start && allowed.end) {
-          if (date.isBetween(allowed.start, allowed.end, "day", "[]")) {
-            return true;
+    // datesBlacklist entries override datesWhitelist
+    if (props.datesBlacklist !== undefined) {
+      for (let disallowed of props.datesBlacklist) {
+        // Blacklist start/end object
+        if (disallowed.start && disallowed.end) {
+          if (date.isBetween(disallowed.start, disallowed.end, "day", "[]")) {
+            return false;
           }
         } else {
-          if (date.isSame(allowed, "day")) {
-            return true;
+          if (date.isSame(disallowed, "day")) {
+            return false;
           }
         }
       }
     }
 
+    if (props.datesWhitelist === undefined) {
+      return true;
+    }
+
+    // Whitelist
+    for (let allowed of props.datesWhitelist) {
+      // start/end object
+      if (allowed.start && allowed.end) {
+        if (date.isBetween(allowed.start, allowed.end, "day", "[]")) {
+          return true;
+        }
+      } else {
+        if (date.isSame(allowed, "day")) {
+          return true;
+        }
+      }
+    }
     return false;
   }
 
